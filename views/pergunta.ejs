@@ -1,0 +1,12 @@
+<%- include('partials/header', { title: 'Guia Perguntas' }) %>
+<body>
+    <%- include('partials/navbar') %>
+        <div class="container">
+
+            <hr>
+            <h1><%= pergunta.titulo %></h1>
+            <p><%= pergunta.description  %></p>
+            <hr>
+        </div>
+</body>
+<%- include('partials/footer') %>
