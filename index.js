@@ -60,7 +60,6 @@ app.get('/pergunta/:id', (req, res)=>{
         raw: true,
     }).then(pergunta =>{
         if(pergunta != undefined){
-            console.log(pergunta)
             res.render("pergunta",{
                 pergunta: pergunta,
             });

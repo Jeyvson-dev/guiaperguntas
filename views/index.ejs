@@ -1,5 +1,4 @@
 <%- include('partials/header', { title: 'Guia Perguntas' }) %>
-
     <body>
         <%- include('partials/navbar') %>
             <div class="container">
@@ -15,11 +14,12 @@
                             <h3><%- element.titulo %></h3>
                         </div>
                         <div class="card-footer">
-                            <a class="btn btn-primary" href="/pergunta/<%-element.id%>">Responder</a>
+                            <a class="btn btn-primary" href="/pergunta/<%= element.id %>"><button class="btn btn-primary">Responder</button></a>
                       </div>
                     </div>
-
                     <% }); %>
+
             </div>
+
     </body>
     <%- include('partials/footer') %>
