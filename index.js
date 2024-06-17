@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const connection = require('./database/database');
 const port = 8080;
 const Pergunta = require("./database/Pergunta");
+const Resposta = require("./database/Resposta");
 
 //database
 connection.authenticate()
@@ -60,14 +61,40 @@ app.get('/pergunta/:id', (req, res)=>{
         raw: true,
     }).then(pergunta =>{
         if(pergunta != undefined){
-            res.render("pergunta",{
-                pergunta: pergunta,
+
+            Resposta.findAll({ 
+
+                where: {pergunta_id:id},
+                order: [
+                    ['id', 'DESC']
+                ]
+            }).then(respostas =>{
+
+                res.render("pergunta",{
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
+
             });
+
+           
         }else{
             res.redirect("/");
         } 
     })
 
+})
+
+app.post('/responder', (req, res)=>{
+    var corpo = req.body.corpo;
+    var perguntaId = req.body.pergunta;
+    Resposta.create({
+        corpo: corpo,
+        pergunta_id: perguntaId
+    }).then(()=>{
+        console.log("resposta adicionada com sucesso");
+        res.redirect(`/pergunta/${perguntaId}`);
+    });
 })
 
 app.listen(port, () => {
